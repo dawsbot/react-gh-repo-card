@@ -15,7 +15,6 @@ storiesOf('Button', module)
     return (
       <GHRepoCard
         name={'o-o'}
-        description={'open things'}
-        url={'https://github.com/dawsonbotsford/o-o'}/>
+        description={'open things'}/>
     );
   });
