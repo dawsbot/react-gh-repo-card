@@ -5,7 +5,7 @@
 ## Usage
 
 ```js
-import GHRepoCard from 'react-gh-repo-card';
+import {GhRepoCard} from 'react-gh-repo-card';
 
 ```
 

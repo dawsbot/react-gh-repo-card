@@ -1,8 +1,13 @@
 import React, {Component} from 'react';
-import Star from './star.svg.react.js';
+import StarSection from './star-section';
 import {load, parse} from 'gh-emoji';
 import htmlParse from 'react-html-parser';
-import {style} from 'glamor';
+import {style, insertRule} from 'glamor';
+
+insertRule(`.gh-emoji {
+  height: 1.9em;
+  vertical-align: middle;
+}`);
 
 const styles = {
   card: {
@@ -14,12 +19,16 @@ const styles = {
     margin: '0px 0px 16px',
     padding: '16px'
   },
-  header: {
+  name: {
     fontSize: '14px',
     fontWeight: '600',
     lineHeight: '21px',
     color: 'rgb(64, 120, 192)',
-    wordWrap: 'break-word'
+    wordWrap: 'break-word',
+    textDecoration: 'none',
+    ':hover': {
+      textDecoration: 'underline'
+    }
   },
   body: {
     fontSize: '12px',
@@ -36,9 +45,6 @@ const styles = {
     marginBottom: '0px',
     marginTop: '0px',
     color: 'rgb(118, 118, 118)'
-  },
-  stars: {
-    marginLeft: '16px'
   }
 };
 
@@ -54,10 +60,9 @@ class StatelessGhRepoCard extends Component {
 
   render() {
     const {name, description, html_url, stargazers_count, language} = this.props;
-    console.log('description: ', description);
     return (
       <div {...style(styles.card)}>
-        <a href={html_url} style={styles.header}>
+        <a href={html_url} {...style(styles.name)}>
           {name}
         </a>
         <div
@@ -66,10 +71,9 @@ class StatelessGhRepoCard extends Component {
         </div>
         <span {...style(styles.footer)}>
           {language}
-          <a {...style(styles.stars)} href={`${html_url}/stargazers`}>
-            <Star/>
-            {stargazers_count}
-          </a>
+          <StarSection
+            html_url={html_url}
+            stargazers_count={stargazers_count}/>
         </span>
       </div>
     );
