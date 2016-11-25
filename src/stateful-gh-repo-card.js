@@ -1,31 +1,16 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import Star from './star.svg.react.js';
 import {load, parse} from 'gh-emoji';
 import htmlParse from 'react-html-parser';
-import {style} from 'glamor';
 import StatelessGhRepoCard from './gh-repo-card';
 
 class GhRepoCard extends Component {
-  static displayName: 'GHRepoCard'
-
-  static propTypes = {
-    url: React.PropTypes.string,
-    name: React.PropTypes.string,
-    description: React.PropTypes.string
-  };
-
-  static defaultProps = {
-    url: 'https://api.github.com/repos/dawsonbotsford/swim',
-    name: '',
-    description: ''
-  };
 
   constructor(props) {
     super(props);
     this.state = {
       githubResponse: {}
-    }
+    };
   }
 
   componentDidMount() {
@@ -41,7 +26,7 @@ class GhRepoCard extends Component {
           });
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
   }
@@ -59,5 +44,17 @@ class GhRepoCard extends Component {
     );
   }
 }
+
+GhRepoCard.propTypes = {
+  url: React.PropTypes.string,
+  name: React.PropTypes.string,
+  description: React.PropTypes.string
+};
+
+GhRepoCard.defaultProps = {
+  url: 'https://api.github.com/repos/dawsonbotsford/swim',
+  name: '',
+  description: ''
+};
 
 export default GhRepoCard;

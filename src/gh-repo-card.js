@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import StarSection from './star-section';
 import {load, parse} from 'gh-emoji';
 import htmlParse from 'react-html-parser';
@@ -49,14 +49,6 @@ const styles = {
 };
 
 class StatelessGhRepoCard extends Component {
-  static displayName: 'StatelessGhRepoCard'
-
-  static propTypes = {
-    name: React.PropTypes.string.isRequired,
-    description: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.array]).isRequired
-  }
 
   render() {
     const {name, description, html_url, stargazers_count, language} = this.props;
@@ -79,5 +71,17 @@ class StatelessGhRepoCard extends Component {
     );
   }
 }
+
+StatelessGhRepoCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  description: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array]).isRequired,
+  html_url: PropTypes.string,
+  stargazers_count: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number]),
+  language: PropTypes.string,
+};
 
 export default StatelessGhRepoCard;
