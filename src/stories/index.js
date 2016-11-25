@@ -1,20 +1,15 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import GHRepoCard from '../index';
+import {GhRepoCard, StatelessGhRepoCard} from '../index';
 
 storiesOf('Button', module)
-  .add('default view', () => (
-    <GHRepoCard/>
+  .add('Default GhRepoCard', () => (
+    <GhRepoCard/>
   ))
-  .add('custom styles', () => {
-    const style = {
-      fontSize: 20,
-      textTransform: 'uppercase',
-      color: '#FF8833',
-    };
+  .add('Default StatelessGhRepoCard', () => {
     return (
-      <GHRepoCard
-        name={'o-o'}
-        description={'open things'}/>
+      <StatelessGhRepoCard
+        name={'custom project'}
+        description={'do custom things with this thing'}/>
     );
   });

@@ -46,7 +46,10 @@
   },
   "dependencies": {
     "axios": "^0.15.2",
-    "babel-runtime": "^6.11.6"
+    "babel-runtime": "^6.11.6",
+    "gh-emoji": "^0.2.5",
+    "glamor": "^2.19.0",
+    "react-html-parser": "^1.0.3"
   },
   "main": "dist/index.js",
   "engines": {
