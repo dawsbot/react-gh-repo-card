@@ -5,8 +5,8 @@
 ## Usage
 
 ```js
-import {GhRepoCard} from 'react-gh-repo-card';
-
+<GhRepoCard
+  url={'https://api.github.com/repos/dawsonbotsford/react-gh-repo-card'}/>
 ```
 
 ## Install
