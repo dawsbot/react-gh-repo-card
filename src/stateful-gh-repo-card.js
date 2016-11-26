@@ -18,8 +18,6 @@ class GhRepoCard extends Component {
       .then((result) => {
         const data = result.data;
         load().then(() => {
-          console.log('parse(data.description): ', parse(data.description));
-          console.log('htmlParse(parse(data.description)): ', htmlParse(parse(data.description)));
           data.description = htmlParse(parse(data.description));
           this.setState({
             githubResponse: data
@@ -32,7 +30,8 @@ class GhRepoCard extends Component {
   }
 
   render() {
-    const {name, description, html_url, language, stargazers_count} = this.state.githubResponse;
+    const {name, description, html_url, language,
+      stargazers_count, forks_count} = this.state.githubResponse;
     return (
       <StatelessGhRepoCard
         name={name || this.props.name}
@@ -40,6 +39,7 @@ class GhRepoCard extends Component {
         html_url={html_url}
         language={language}
         stargazers_count={stargazers_count}
+        forks_count={forks_count}
       />
     );
   }
@@ -52,7 +52,7 @@ GhRepoCard.propTypes = {
 };
 
 GhRepoCard.defaultProps = {
-  url: 'https://api.github.com/repos/dawsonbotsford/swim',
+  url: 'https://api.github.com/repos/dawsonbotsford/vimrcBuilder',
   name: '',
   description: ''
 };

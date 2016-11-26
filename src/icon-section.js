@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {style} from 'glamor';
-import Star from './star.svg.react';
+import DefaultIcon from './star.svg.react';
 
 const styles = {
-  starWrapper: {
+  iconWrapper: {
     boxSizing: 'border-box',
     color: 'rgb(118, 118, 118)',
     textDecoration: 'none',
@@ -12,9 +12,8 @@ const styles = {
       color: 'rgb(64, 120, 192)'
     }
   },
-  star: {
+  icon: {
     verticalAlign: 'text-bottom'
-    // color: 'rgb(118, 118, 118)'
   }
 };
 
@@ -40,18 +39,20 @@ class StarSection extends Component {
   }
 
   render() {
-    const {html_url, stargazers_count} = this.props;
+    const {html_url, count, Icon} = this.props;
+    if (count === 0) {
+      return null;
+    }
     return (
       /* eslint-disable camelcase */
       <a
-        {...style(styles.starWrapper)}
-        href={`${html_url}/stargazers`}
+        {...style(styles.iconWrapper)}
+        href={html_url}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
-
-        <Star {...style(styles.star)} fill={this.state.fill} />
-        {stargazers_count}
+        <Icon {...style(styles.icon)} fill={this.state.fill} />
+        {` ${count}`}
       </a>
       /* eslint-enable camelcase */
     );
@@ -60,14 +61,16 @@ class StarSection extends Component {
 
 StarSection.propTypes = {
   html_url: React.PropTypes.string,
-  stargazers_count: React.PropTypes.oneOfType([
+  count: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number
-  ])
+  ]),
+  Icon: React.PropTypes.func
 };
 
 StarSection.defaultProps = {
-  testString: 'middle'
+  Icon: DefaultIcon,
+  count: 0
 };
 
 export default StarSection;
