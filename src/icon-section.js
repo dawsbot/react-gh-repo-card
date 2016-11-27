@@ -40,9 +40,6 @@ class StarSection extends Component {
 
   render() {
     const {html_url, count, Icon} = this.props;
-    if (count === 0) {
-      return null;
-    }
     return (
       /* eslint-disable camelcase */
       <a
@@ -64,13 +61,13 @@ StarSection.propTypes = {
   count: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number
-  ]),
-  Icon: React.PropTypes.func
+  ]).isRequired,
+  Icon: React.PropTypes.func.isRequired
 };
 
 StarSection.defaultProps = {
   Icon: DefaultIcon,
-  count: 0
+  count: null
 };
 
 export default StarSection;

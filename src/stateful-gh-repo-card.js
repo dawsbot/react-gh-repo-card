@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 // import {emojify} from 'node-emoji';
-import {unifiedToHTML} from 'emoji'
+import {unifiedToHTML} from 'emoji';
 import StatelessGhRepoCard from './gh-repo-card';
 
 class GhRepoCard extends Component {
@@ -19,6 +19,7 @@ class GhRepoCard extends Component {
         const data = result.data;
         data.description = unifiedToHTML(data.description);
         // data.description = emojify(data.description);
+        console.log('data.stargazers_count: ', data.stargazers_count);
         this.setState({
           githubResponse: data
         });

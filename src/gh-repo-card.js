@@ -75,11 +75,11 @@ class StatelessGhRepoCard extends Component {
         </div>
         {showFooter && (<span {...style(getStyles().footer)}>
           {language}
-          {stargazers_count && (<IconSection
+          {stargazers_count > 0 && (<IconSection
             html_url={`${html_url}/stargazers`}
             count={stargazers_count}
           />)}
-          {forks_count && (<IconSection
+          {forks_count > 0 && (<IconSection
             html_url={`${html_url}/network`}
             count={forks_count}
             Icon={ForksIcon}

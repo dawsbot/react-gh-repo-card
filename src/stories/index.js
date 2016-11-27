@@ -24,7 +24,7 @@ stories.add('Default GhRepoCard', () => (
       html_url={text('html_url', 'https://github.com/dawsonbotsford/react-gh-repo-card')}
       description={text('description', 'do custom things with this thing')}
       language={text('language', 'C')}
-      stargazers_count={number('stargazers_count', 9)}
+      stargazers_count={number('stargazers_count', 0)}
     />
   );
 });
