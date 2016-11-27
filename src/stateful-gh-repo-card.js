@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {load, parse} from 'gh-emoji';
-import htmlParse from 'react-html-parser';
+// import {emojify} from 'node-emoji';
+import {unifiedToHTML} from 'emoji'
 import StatelessGhRepoCard from './gh-repo-card';
 
 class GhRepoCard extends Component {
@@ -17,11 +17,10 @@ class GhRepoCard extends Component {
     axios.get(this.props.url)
       .then((result) => {
         const data = result.data;
-        load().then(() => {
-          data.description = htmlParse(parse(data.description));
-          this.setState({
-            githubResponse: data
-          });
+        data.description = unifiedToHTML(data.description);
+        // data.description = emojify(data.description);
+        this.setState({
+          githubResponse: data
         });
       })
       .catch((err) => {
@@ -52,7 +51,7 @@ GhRepoCard.propTypes = {
 };
 
 GhRepoCard.defaultProps = {
-  url: 'https://api.github.com/repos/dawsonbotsford/vimrcBuilder',
+  url: 'https://api.github.com/repos/dawsonbotsford/swim',
   name: '',
   description: ''
 };

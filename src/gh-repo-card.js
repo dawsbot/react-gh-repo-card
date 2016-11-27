@@ -11,6 +11,7 @@ insertRule(`.gh-emoji {
 function getStyles(props = {}) {
   return {
     card: {
+      backgroundColor: 'white',
       fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
       "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
       width: '360px',
