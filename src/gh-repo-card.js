@@ -1,12 +1,9 @@
 import React, {Component, PropTypes} from 'react';
-import {style, insertRule} from 'glamor';
+import {style} from 'glamor';
+import {emojify} from 'node-emoji';
+
 import IconSection from './icon-section';
 import ForksIcon from './forks.svg.react';
-
-insertRule(`.gh-emoji {
-  height: 1.9em;
-  vertical-align: middle;
-}`);
 
 function getStyles(props = {}) {
   return {
@@ -71,7 +68,7 @@ class StatelessGhRepoCard extends Component {
         <div
           {...style(getStyles({showFooter}).body)}
         >
-          {description}
+          {emojify(description)}
         </div>
         {showFooter && (<span {...style(getStyles().footer)}>
           {language}

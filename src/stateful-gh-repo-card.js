@@ -17,9 +17,8 @@ class GhRepoCard extends Component {
     axios.get(this.props.url)
       .then((result) => {
         const data = result.data;
-        data.description = unifiedToHTML(data.description);
+        // data.description = unifiedToHTML(data.description);
         // data.description = emojify(data.description);
-        console.log('data.stargazers_count: ', data.stargazers_count);
         this.setState({
           githubResponse: data
         });
