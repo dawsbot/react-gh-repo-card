@@ -6,7 +6,7 @@
 
 ```js
 <GhRepoCard
-  url={'https://api.github.com/repos/dawsonbotsford/react-gh-repo-card'}/>
+  fullname={'dawsonbotsford/react-gh-repo-card'}/>
 ```
 
 ## Install

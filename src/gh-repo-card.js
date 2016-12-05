@@ -1,105 +1,51 @@
-import React, {Component, PropTypes} from 'react';
-import {style} from 'glamor';
-import {emojify} from 'node-emoji';
+import React, {Component} from 'react';
+import axios from 'axios';
+import StatelessGhRepoCard from './stateless-gh-repo-card';
 
-import IconSection from './icon-section';
-import ForksIcon from './forks.svg.react';
+class GhRepoCard extends Component {
 
-function getStyles(props = {}) {
-  return {
-    card: {
-      backgroundColor: 'white',
-      fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
-      width: '360px',
-      border: '1px solid rgb(221, 221, 221)',
-      borderRadius: '3px',
-      margin: '0px 0px 16px',
-      padding: '16px'
-    },
-    name: {
-      fontSize: '14px',
-      fontWeight: '600',
-      lineHeight: '21px',
-      color: 'rgb(64, 120, 192)',
-      wordWrap: 'break-word',
-      textDecoration: 'none',
-      ':hover': {
-        textDecoration: 'underline'
-      }
-    },
-    body: {
-      fontSize: '12px',
-      lineHeight: '18px',
-      color: 'rgb(118, 118, 118)',
-      ...(props.showFooter && {marginBottom: '16px'}),
-      marginTop: '8px',
-      wordWrap: 'break-word'
-    },
-    footer: {
-      display: 'block',
-      fontSize: '12px',
-      lineHeight: '18px',
-      marginBottom: '0px',
-      marginTop: '0px',
-      color: 'rgb(118, 118, 118)'
-    }
-  };
-}
+  constructor(props) {
+    super(props);
+    this.state = {
+      githubResponse: {}
+    };
+  }
 
-class StatelessGhRepoCard extends Component {
+  componentDidMount() {
+    axios.get(`https://api.github.com/repos/${this.props.fullname}`)
+      .then((result) => {
+        console.log('result: ', result);
+        this.setState({
+          githubResponse: result.data
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 
   render() {
-    const {
-      name,
-      description,
-      html_url,
-      stargazers_count,
-      language,
-      forks_count
-    } = this.props;
-    const showFooter = language || stargazers_count || forks_count;
-
+    const {name, description, html_url, language,
+      stargazers_count, forks_count} = this.state.githubResponse;
     return (
-      <div {...style(getStyles().card)}>
-        <a href={html_url} {...style(getStyles().name)}>
-          {name}
-        </a>
-        <div
-          {...style(getStyles({showFooter}).body)}
-        >
-          {emojify(description)}
-        </div>
-        {showFooter && (<span {...style(getStyles().footer)}>
-          {language}
-          {stargazers_count > 0 && (<IconSection
-            html_url={`${html_url}/stargazers`}
-            count={stargazers_count}
-          />)}
-          {forks_count > 0 && (<IconSection
-            html_url={`${html_url}/network`}
-            count={forks_count}
-            Icon={ForksIcon}
-          />)}
-        </span>)}
-      </div>
+      <StatelessGhRepoCard
+        name={name}
+        description={(description)}
+        html_url={html_url}
+        language={language}
+        stargazers_count={stargazers_count}
+        forks_count={forks_count}
+      />
     );
   }
 }
 
-StatelessGhRepoCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  description: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array]).isRequired,
-  html_url: PropTypes.string,
-  stargazers_count: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number]),
-  forks_count: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number]),
-  language: PropTypes.string
+GhRepoCard.propTypes = {
+  fullname: React.PropTypes.string.isRequired
 };
 
-export default StatelessGhRepoCard;
+GhRepoCard.defaultProps = {
+  fullname: 'https://api.github.com/repos/dawsonbotsford/react-gh-repo-card'
+};
+
+export default GhRepoCard;
