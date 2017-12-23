@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {style, insertRule} from 'glamor';
-import IconSection from './icon-section';
-import ForksIcon from './forks.svg.react';
+import IconSection from './IconSection';
+import ForksIcon from './ForksIcon';
 
 insertRule(`.gh-emoji {
   height: 1.9em;
@@ -49,51 +49,46 @@ function getStyles(props = {}) {
   };
 }
 
-class StatelessGhRepoCard extends Component {
-
-  render() {
-    const {
-      name,
-      description,
-      html_url,
-      stargazers_count,
-      language,
-      forks_count
-    } = this.props;
-    const showFooter = language || stargazers_count || forks_count;
-
-    return (
-      <div {...style(getStyles().card)}>
-        <a href={html_url} {...style(getStyles().name)}>
-          {name}
-        </a>
-        <div
-          {...style(getStyles({showFooter}).body)}
-        >
-          {description}
-        </div>
-        {showFooter && (<span {...style(getStyles().footer)}>
-          {language}
-          {stargazers_count && (<IconSection
-            html_url={`${html_url}/stargazers`}
-            count={stargazers_count}
-          />)}
-          {forks_count && (<IconSection
-            html_url={`${html_url}/network`}
-            count={forks_count}
-            Icon={ForksIcon}
-          />)}
-        </span>)}
+const StatelessCard = (props) => {
+  const {
+    name,
+    description,
+    html_url,
+    stargazers_count,
+    language,
+    forks_count
+  } = props;
+  const showFooter = language || stargazers_count || forks_count;
+  console.log('forks: ', forks_count)
+  return (
+    <div {...style(getStyles().card)}>
+      <a href={html_url} {...style(getStyles().name)}>
+        {name}
+      </a>
+      <div
+        {...style(getStyles({showFooter}).body)}
+      >
+        {description}
       </div>
-    );
-  }
+      {showFooter && (<span {...style(getStyles().footer)}>
+        {language}
+        {(stargazers_count > 0) && (<IconSection
+          html_url={`${html_url}/stargazers`}
+          count={stargazers_count}
+        />)}
+        {(forks_count > 0) && (<IconSection
+          html_url={`${html_url}/network`}
+          count={forks_count}
+          Icon={ForksIcon}
+        />)}
+      </span>)}
+    </div>
+  );
 }
 
-StatelessGhRepoCard.propTypes = {
+StatelessCard.propTypes = {
   name: PropTypes.string.isRequired,
-  description: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array]).isRequired,
+  description: PropTypes.string.isRequired,
   html_url: PropTypes.string,
   stargazers_count: PropTypes.oneOfType([
     PropTypes.string,
@@ -104,4 +99,4 @@ StatelessGhRepoCard.propTypes = {
   language: PropTypes.string
 };
 
-export default StatelessGhRepoCard;
+export default StatelessCard;

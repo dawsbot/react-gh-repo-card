@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {load, parse} from 'gh-emoji';
 import htmlParse from 'react-html-parser';
-import StatelessGhRepoCard from './gh-repo-card';
+import StatelessCard from './StatelessCard';
 
-class GhRepoCard extends Component {
+class GHCard extends Component {
 
   constructor(props) {
     super(props);
@@ -14,8 +14,10 @@ class GhRepoCard extends Component {
   }
 
   componentDidMount() {
-    axios.get(this.props.url)
+    const {owner, repo} = this.props;
+    axios.get(`https://api.github.com/repos/${owner}/${repo}`)
       .then((result) => {
+        console.log({result})
         const data = result.data;
         load().then(() => {
           data.description = htmlParse(parse(data.description));
@@ -24,16 +26,13 @@ class GhRepoCard extends Component {
           });
         });
       })
-      .catch((err) => {
-        console.error(err);
-      });
   }
 
   render() {
     const {name, description, html_url, language,
       stargazers_count, forks_count} = this.state.githubResponse;
     return (
-      <StatelessGhRepoCard
+      <StatelessCard
         name={name || this.props.name}
         description={(description) || this.props.description}
         html_url={html_url}
@@ -45,16 +44,18 @@ class GhRepoCard extends Component {
   }
 }
 
-GhRepoCard.propTypes = {
-  url: React.PropTypes.string,
+GHCard.propTypes = {
+  owner: React.PropTypes.string,
+  repo: React.PropTypes.string,
   name: React.PropTypes.string,
   description: React.PropTypes.string
 };
 
-GhRepoCard.defaultProps = {
-  url: 'https://api.github.com/repos/dawsonbotsford/vimrcBuilder',
+GHCard.defaultProps = {
+  owner: 'folkswhocode',
+  repo: 'awesome-diversity',
   name: '',
   description: ''
 };
 
-export default GhRepoCard;
+export default GHCard;

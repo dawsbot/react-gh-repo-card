@@ -1,18 +1,70 @@
-# React Gh Repo Card Component
+# React Project Card
 
-> A react component to show off GitHub repositories
+> A React component to show-off your software
+
+![](https://i.imgur.com/vYW6HnD.png)
 
 ## Usage
 
 ```js
-<GhRepoCard
-  url={'https://api.github.com/repos/dawsonbotsford/react-gh-repo-card'}/>
+import {GHCard} from 'react-project-card';
+
+<GHCard
+  url={'https://api.github.com/repos/dawsonbotsford/react-project-card'}/>
 ```
 
 ## Install
 
 ```sh
-npm install --save react-gh-repo-card
+yarn add react-project-card
+
+# Same as "npm install --save react-project-card"
 ```
 
+## Non-GitHub repos
 
+Do you have software that is not on GitHub? You can use the `StatelessCard`:
+
+Start by importing `StatelessCard`
+
+```js
+import {StatelessCard} from 'react-project-card';
+```
+
+Then render the `StatelessCard`
+
+```jsx
+<StatelessCard
+  name={'My Pretty Project 💖 💄'}
+  description={'This is a pretty description for a pretty project 👠'} />
+```
+
+<br/>
+
+Here's a more complete example:
+
+```jsx
+<StatelessCard
+  name="The Prettiest Project 🚀 💖 💄"
+  description="The prettiest description 💎"
+  html_url="https://github.com/dawsbot"
+  stargazers_count="123"
+  forks_count="84"
+  language="elm"
+  />
+```
+
+### Props
+
+* name: string *required*
+* description: string *required*
+* html_url: string,
+* stargazers_count: string || number,
+* forks_count: string || number,
+* language: string
+
+<br/>
+
+## More Examples
+
+![](https://i.imgur.com/3B1NlsL.png)

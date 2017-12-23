@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {style} from 'glamor';
-import DefaultIcon from './star.svg.react';
+import StarIcon from './StarIcon';
 
 const styles = {
   iconWrapper: {
@@ -17,22 +17,20 @@ const styles = {
   }
 };
 
-class StarSection extends Component {
+class IconSection extends Component {
   constructor(props) {
     super(props);
     this.state = {
       fill: 'rgb(118, 118, 118)'
     };
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
-  handleMouseEnter () {
+  handleMouseEnter = () => {
     this.setState({
       fill: 'rgb(64, 120, 192)'
     });
   }
-  handleMouseLeave () {
+  handleMouseLeave = () => {
     this.setState({
       fill: 'rgb(118, 118, 118)'
     });
@@ -59,7 +57,7 @@ class StarSection extends Component {
   }
 }
 
-StarSection.propTypes = {
+IconSection.propTypes = {
   html_url: React.PropTypes.string,
   count: React.PropTypes.oneOfType([
     React.PropTypes.string,
@@ -68,9 +66,9 @@ StarSection.propTypes = {
   Icon: React.PropTypes.func
 };
 
-StarSection.defaultProps = {
-  Icon: DefaultIcon,
+IconSection.defaultProps = {
+  Icon: StarIcon,
   count: 0
 };
 
-export default StarSection;
+export default IconSection;

@@ -1,16 +1,37 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import { GhRepoCard, StatelessGhRepoCard } from '../index';
+import { GHCard, StatelessCard } from '../index';
 
-storiesOf('GhRepoCard', module)
-  .add('Default GhRepoCard', () => (
-    <GhRepoCard />
+const Padding = (props) => (
+  <div style={{margin: '50px'}}>
+    {props.children}
+  </div>
+);
+
+storiesOf('react-project-card', module)
+  .add('GHCard', () => (
+    <Padding>
+      <GHCard />
+
+      <GHCard owner="dawsbot" repo="pluc"/>
+      <GHCard owner="dawsbot" repo="mailto"/>
+    </Padding>
   ))
-  .add('Default StatelessGhRepoCard', () => {
+  .add('<StatelessCard />', () => {
     return (
-      <StatelessGhRepoCard
-        name={'custom project'}
-        description={'do custom things with this thing'}
-      />
+      <Padding>
+        <StatelessCard
+          name={'A Pretty Project 💖 💄'}
+          description={'A pretty description for a pretty project 👠'}
+          />
+        <StatelessCard
+          name="The Prettiest Project 🚀 💖 💄"
+          description="The prettiest description 💎"
+          html_url="https://github.com/dawsbot"
+          stargazers_count="123"
+          forks_count="84"
+          language="elm"
+          />
+      </Padding>
     );
   });
