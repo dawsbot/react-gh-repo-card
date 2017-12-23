@@ -2,9 +2,9 @@ import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import { GHCard, StatelessCard } from '../index';
 
-const Padding = (props) => (
+const Padding = ({children}) => (
   <div style={{margin: '50px'}}>
-    {props.children}
+    {children}
   </div>
 );
 
@@ -13,16 +13,16 @@ storiesOf('react-project-card', module)
     <Padding>
       <GHCard />
 
-      <GHCard owner="dawsbot" repo="pluc"/>
-      <GHCard owner="dawsbot" repo="mailto"/>
+      <GHCard owner="dawsbot" repo="pluc" />
+      <GHCard owner="dawsbot" repo="mailto" />
     </Padding>
   ))
   .add('<StatelessCard />', () => {
     return (
       <Padding>
         <StatelessCard
-          name={'A Pretty Project 💖 💄'}
-          description={'A pretty description for a pretty project 👠'}
+          name="A Pretty Project 💖 💄"
+          description="A pretty description for a pretty project 👠"
           />
         <StatelessCard
           name="The Prettiest Project 🚀 💖 💄"

@@ -1,5 +1,7 @@
-import React, {Component, PropTypes} from 'react';
+import React from 'react';
 import {style, insertRule} from 'glamor';
+import PropTypes from 'prop-types';
+
 import IconSection from './IconSection';
 import ForksIcon from './ForksIcon';
 
@@ -59,7 +61,6 @@ const StatelessCard = (props) => {
     forks_count
   } = props;
   const showFooter = language || stargazers_count || forks_count;
-  console.log('forks: ', forks_count)
   return (
     <div {...style(getStyles().card)}>
       <a href={html_url} {...style(getStyles().name)}>
@@ -70,21 +71,22 @@ const StatelessCard = (props) => {
       >
         {description}
       </div>
-      {showFooter && (<span {...style(getStyles().footer)}>
-        {language}
-        {(stargazers_count > 0) && (<IconSection
-          html_url={`${html_url}/stargazers`}
-          count={stargazers_count}
-        />)}
-        {(forks_count > 0) && (<IconSection
-          html_url={`${html_url}/network`}
-          count={forks_count}
-          Icon={ForksIcon}
-        />)}
-      </span>)}
+      {showFooter && (
+        <span {...style(getStyles().footer)}>
+          {language}
+          {(stargazers_count > 0) && (<IconSection
+            html_url={`${html_url}/stargazers`}
+            count={stargazers_count}
+          />)}
+          {(forks_count > 0) && (<IconSection
+            html_url={`${html_url}/network`}
+            count={forks_count}
+            Icon={ForksIcon}
+          />)}
+        </span>)}
     </div>
   );
-}
+};
 
 StatelessCard.propTypes = {
   name: PropTypes.string.isRequired,

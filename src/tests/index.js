@@ -1,8 +1,10 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import Button from '../index';
 import { expect } from 'chai';
 import sinon from 'sinon';
+
+import Button from '../index';
+
 const { describe, it } = global;
 
 describe('Button', () => {
@@ -16,11 +18,9 @@ describe('Button', () => {
     const clickMe = sinon.stub();
     // Here we do a JSDOM render. So, that's why we need to
     // wrap this with a div.
-    const wrapper = mount(
-      <div>
-        <Button onClick={ clickMe }>ClickMe</Button>
-      </div>
-    );
+    const wrapper = mount(<div>
+        <Button onClick={clickMe}>ClickMe</Button>
+      </div>);
 
     wrapper.find('button').simulate('click');
     expect(clickMe.callCount).to.be.equal(1);

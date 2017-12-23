@@ -13,6 +13,8 @@ import {GHCard} from 'react-project-card';
   url={'https://api.github.com/repos/dawsonbotsford/react-project-card'}/>
 ```
 
+<br/>
+
 ## Install
 
 ```sh
@@ -20,6 +22,8 @@ yarn add react-project-card
 
 # Same as "npm install --save react-project-card"
 ```
+
+<br/>
 
 ## Non-GitHub repos
 
